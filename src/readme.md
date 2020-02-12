@@ -1,0 +1,1 @@
+git clone qlik-demo-team/qdt-components, qlik-demo-team/nebula.js, and qlik-demo-team/qdt-components-playground
