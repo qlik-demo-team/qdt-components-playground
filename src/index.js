@@ -1,6 +1,7 @@
-import { qdtNova, QdtSelect, QdtTable } from 'qdt-components';  //eslint-disable-line
+import { qdtNova, QdtSelect, QdtTable, QdtSequencer, QdtSlider } from 'qdt-components';  //eslint-disable-line
 import nucleus from '@nebula.js/nucleus';
 import * as supernova from '@nebula.js/supernova';  //eslint-disable-line
+// import combochart from '@nebula.js/sn-mekko-chart';
 
 /* CONNECT TO APP WITH enigma.js */
 const enigma = require('enigma.js');
@@ -33,7 +34,15 @@ session.open().then(global => global.openDoc(config.appId)).then((app) => {
       },
       {
         name: 'qdt-select',
-        load: () => Promise.resolve(qdtNova(supernova)(QdtSelect, {})),
+        load: () => Promise.resolve(qdtNova(supernova)(QdtSelect, { multiple: true })),
+      },
+      {
+        name: 'qdt-sequencer',
+        load: () => Promise.resolve(qdtNova(supernova)(QdtSequencer, { })),
+      },
+      {
+        name: 'qdt-slider',
+        load: () => Promise.resolve(qdtNova(supernova)(QdtSlider, { })),
       },
     ],
   });
@@ -71,6 +80,42 @@ session.open().then(global => global.openDoc(config.appId)).then((app) => {
       qListObjectDef: {
         qDef: {
           qFieldDefs: ['[Product Group Desc]'],
+        },
+        qInitialDataFetch: [{
+          qWidth: 1,
+          qHeight: 1000,
+        }],
+      },
+    },
+  });
+
+  // QdtSequencer
+  nuked.create({
+    type: 'qdt-sequencer',
+  }, {
+    element: document.getElementById('sequencer'),
+    properties: {
+      qListObjectDef: {
+        qDef: {
+          qFieldDefs: ['Month'],
+        },
+        qInitialDataFetch: [{
+          qWidth: 1,
+          qHeight: 1000,
+        }],
+      },
+    },
+  });
+
+  // QdtSlider
+  nuked.create({
+    type: 'qdt-slider',
+  }, {
+    element: document.getElementById('slider'),
+    properties: {
+      qListObjectDef: {
+        qDef: {
+          qFieldDefs: ['Month'],
         },
         qInitialDataFetch: [{
           qWidth: 1,
