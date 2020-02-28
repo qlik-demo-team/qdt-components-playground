@@ -1,5 +1,7 @@
+import jsx from 'html-react-parser';
 import {
   qdtEnigma, qdtCompose, QdtTable, QdtButton, //eslint-disable-line
+  // qdtEnigma, qdtCompose, QdtTable, QdtPicasso, QdtSelect, //eslint-disable-line
 } from 'qdt-components';
 // import React from 'react';
 
@@ -11,14 +13,6 @@ const config = {
   appId: '372cbc85-f7fb-4db6-a620-9a5367845dce',
 };
 
-// const myButton = ({ label, type }) => ( //eslint-disable-line
-//   <QdtButton //eslint-disable-line
-//     label={label}
-//     type={type}
-//   />
-// );
-
-// https://sense-demo-staging.qlik.com/windows/sense/app/372cbc85-f7fb-4db6-a620-9a5367845dce/overview
 
 qdtEnigma(config).then((app) => {  //eslint-disable-line
   // qdtCompose({
@@ -71,6 +65,14 @@ qdtEnigma(config).then((app) => {  //eslint-disable-line
         return acc;
       }, {});
       console.log(fields);
+  window.q = q;
+  setTimeout(() => {
+    console.log('running update');
+    q.update({
+      component: ({ layout }) => jsx(`<div>${layout.avgSales}</div>`),
+      properties: {
+        avgSales: { qValueExpression: { qExpr: 'Avg([Sales Price])' } },
+      },
     });
   });
 });
