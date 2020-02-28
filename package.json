@@ -9,7 +9,10 @@
     "@nebula.js/supernova": "file:../nebula.js/apis/supernova",
     "babel-polyfill": "^6.26.0",
     "enigma.js": "^2.6.3",
-    "qdt-components": "file:../qdt-components"
+    "html-react-parser": "^0.10.1",
+    "jsx-runtime": "^1.2.0",
+    "qdt-components": "file:../qdt-components",
+    "react": "^16.13.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

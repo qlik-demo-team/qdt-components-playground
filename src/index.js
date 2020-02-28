@@ -1,5 +1,6 @@
+import jsx from 'html-react-parser';
 import {
-  qdtEnigma, qdtCompose, QdtTable, //eslint-disable-line
+  qdtEnigma, qdtCompose, QdtTable, QdtPicasso, QdtSelect, //eslint-disable-line
 } from 'qdt-components';
 
 const config = {
@@ -9,6 +10,7 @@ const config = {
   prefix: '',
   appId: '372cbc85-f7fb-4db6-a620-9a5367845dce',
 };
+
 
 qdtEnigma(config).then((app) => {  //eslint-disable-line
   const q = qdtCompose({
@@ -27,16 +29,13 @@ qdtEnigma(config).then((app) => {  //eslint-disable-line
       },
     },
   });
+  window.q = q;
   setTimeout(() => {
     console.log('running update');
     q.update({
-      element: document.querySelector('.object'),
+      component: ({ layout }) => jsx(`<div>${layout.avgSales}</div>`),
       properties: {
-        qHyperCubeDef: {
-          qDimensions: [{
-            qDef: { qFieldDefs: ['[Sales Rep Name]'] },
-          }],
-        },
+        avgSales: { qValueExpression: { qExpr: 'Avg([Sales Price])' } },
       },
     });
   }, 5000);
